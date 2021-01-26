@@ -14,7 +14,10 @@ class Board
             print "|"
         end
         print "\n"
-        print @horizontal
+        puts @horizontal
+    end
+    def starting_pieces(piece,x,y)
+        @grid[x][y] = piece.icon
     end
 end
 class Piece
@@ -24,43 +27,48 @@ class Piece
         end
     end
 end
-class Pawn 
-    def initialize(color,x,y)
+class Pawn < Piece
+    def initialize(color)
         @icon = color == "white" ? "♙" : "♟"
     end
 end
 
-class Knight 
-    def initialize(color,x,y)
+class Knight < Piece
+    def initialize(color)
         @icon = color == "white" ? "♘" : "♞"
     end
 end
 
-class Rook 
-    def initialize(color,x,y)
+class Rook < Piece
+    attr_accessor :icon
+    def initialize(color)
         @icon = color == "white" ? "♖" : "♜"
     end
 end
 
-class Bishop 
-    def initialize(color,x,y)
+class Bishop < Piece
+    def initialize(color)
         @icon = color == "white" ? "♗" : "♝"
     end
 end
 
-class King 
-    def initialize(color,x,y)
+class King < Piece
+    def initialize(color)
         @icon = color == "white" ? "♔" : "♚"
     end
 end
 
-class Queen
-    def initialize(color,x,y)
+class Queen < Piece
+    def initialize(color)
         @icon = color == "white" ? "♕" : "♛"
     end
 end
 
 board = Board.new
-rook = Rook.new("white",0,0)
-board.rook
+rook = Rook.new("white")
+b_rook = Rook.new("black")
+board.starting_pieces(rook,7,0)
+board.starting_pieces(rook,7,7)
+board.starting_pieces(b_rook,0,0)
+board.starting_pieces(b_rook,0,7)
 puts(board)
